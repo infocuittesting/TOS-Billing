@@ -1,0 +1,189 @@
+<div class="container-fluid">
+    <div class="row">
+            <div class=" col-lg-9">
+
+                    <div class="col-lg-4" >
+                            <div class="card">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-xs-5">
+                                            <!-- <div class="icon-big icon-warning text-center">
+                                                <i class="ti-layout-width-default"></i>
+                                            </div> -->
+                                            <img src="./assets/empty table.png" style="width:100%;height:50%">
+                                        </div>
+                                        <div class="col-xs-7">
+                                            <div class="numbers">
+                                                <p>TABLE</p>
+                                                1
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="footer">
+                                            <hr />
+                                            <div class="stats">
+                                                <!-- <i class="ti-time"></i> 12.00 -->
+                                                Total:<i class="fa fa-inr"></i>790
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="col-lg-4">
+                            <div class="card">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-xs-5">
+                                            <!-- <div class="icon-big icon-success text-center">
+                                                <i class="ti-check"></i>
+                                            </div> -->
+                                            <img src="./assets/eating-dinner.png" style="width:100%;height:50%">
+                                        </div>
+                                        <div class="col-xs-7">
+                                            <div class="numbers">
+                                                <p>TABLE</p>
+                                                2
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="footer">
+                                            <hr />
+                                            <div class="stats">
+                                                <i class="ti-time"></i> 12.00
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div> 
+                         <div class="col-lg-4">
+                            <div class="card">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-xs-5">
+                                                <img src="./assets/empty table.png" style="width:100%;height:50%">
+                                            <!-- <div class="icon-big icon-danger text-center">
+                                                <i class="ti-flag-alt"></i>
+                                            </div> -->
+                                        </div>
+                                        <div class="col-xs-7">
+                                            <div class="numbers">
+                                                <p>TABLE</p>
+                                                3
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="footer">
+                                        <hr />
+                                        <div class="stats">
+                                            <i class="ti-time"></i> 12.00
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                                     
+                        </div>                      
+                        
+                        
+          
+                        <div class="col-lg-4">
+                                <div class="card">
+                                    <div class="content">
+                                        <div class="row">
+                                            <div class="col-xs-5">
+                                                    <img src="./assets/eating-dinner.png" style="width:100%;height:50%">
+                                                <!-- <div class="icon-big icon-danger text-center">
+                                                    <i class="ti-flag-alt"></i>
+                                                </div> -->
+                                            </div>
+                                            <div class="col-xs-7">
+                                                <div class="numbers">
+                                                    <p>TABLE</p>
+                                                    4
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="footer">
+                                            <hr />
+                                            <div class="stats">
+                                                <i class="ti-time"></i> 12.00
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                          
+                            </div>      
+          
+          
+                            <div class="col-lg-4">
+                                    <div class="card">
+                                        <div class="content">
+                                            <div class="row">
+                                                <div class="col-xs-5">
+                                                        <img src="./assets/empty table.png" style="width:100%;height:50%">
+                                                    <!-- <div class="icon-big icon-warning text-center">
+                                                     <i class="ti-layout-width-default"></i>
+                                                    </div> -->
+                                                </div>
+                                                <div class="col-xs-7">
+                                                    <div class="numbers">
+                                                        <p>TABLE</p>
+                                                        5
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="footer">
+                                                <hr />
+                                                <div class="stats">
+                                                    <i class="ti-time"></i> 12.00
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>                           
+                                </div>      
+                    </div>
+
+
+            
+            <div class="col-lg-3 ">
+                    <div class="row">
+                            <div class="">
+                                <div class="card">
+                                    <div class="header">
+                                        <h4 class="title" style="color:red;text-align: center">TABLE:1</h4>
+                                        <h6 class="category" style="color:red;float: right;margin-top: 10%">Bill.no:1</h6>
+                                        <p class="category" style="color:red;margin-top:10%">BILL</p>
+                                    </div>
+                                    <div class="table-responsive my-custom-scrollbar">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <b></b><tr style="color:red">
+                                                    <th>Items</th>
+                                                    <th>Quantity</th>
+                                                    <th>Price</th>
+                                                </tr>
+                                                
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let item of Bill">
+                                                    <td>{{item.itemname}}</td>
+                                                    <td><i class="fa fa-times"></i>{{item.quantity}}</td>
+                                                    <td><i class="fa fa-inr"></i> {{item.price}}</td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr style="color: red;font-size: 20px">    
+                                                                                                 
+                                                    <td>Total</td>
+                                                    
+                                                    <td><i class="fa fa-inr"></i> 790</td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                    
+                                    </div>
+                                </div>
+                            </div>     
+                        </div>
+
+            </div>
+
+        
+    </div>

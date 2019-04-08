@@ -1,0 +1,121 @@
+<div class="container-fluid">
+    <div class="">
+            <div class="row">
+          
+          <div class="col-md-3">
+          <b style="font-size:20px;margin-left: 250%">FoodCatagory</b>
+          <br>
+         <div class="form-group">
+                <input placeholder="Enter Catagory here" name="reason"  style="width:125%;margin-left: 220%" type="text" class="form-control"  list="value">
+                 <datalist name="" id="value"  style="width: 100%;">
+                 <option *ngFor="let ngg of catagories">{{ngg.cname}}</option>
+                 <!-- <option>Starter</option>
+                 <option>Side Dish</option>
+                 <option>Main Dish</option>
+                 <option>Desserts</option> -->
+                 </datalist>
+             
+         </div>
+          </div>
+          <div class="col-md-3">  
+        </div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="header">
+                    <div class="card-header">
+                            <input type="text" style="width:20%" placeholder="Enter Item Name">
+                            <input type="text" placeholder="Enter Catagory here" style="width:20%" list="key">
+                            <datalist name="" id="key">
+                            <option *ngFor="let ngg of catagories">{{ngg.cname}}</option>
+                            <!-- <option>Starter</option>
+                            <option>Side Dish</option>
+                            <option>Main Dish</option>
+                            <option>Desserts</option> -->
+                            </datalist>
+                            
+                            <input type="text" style="width:20%" placeholder="Enter Price">
+                            <button class="btn btn-warning" style="width:10%;margin-left:10%">ADD</button>
+                            </div>
+                            <br>
+                <h4 class="title" style="color:red">Main Dishes</h4>
+            </div>
+            <div class="table-responsive my-custom-scrollbar">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr style="color:red">
+                            <th>Items</th>
+                            <th>Catagory</th>
+                            <th>Price</th>
+                        </tr>
+                        
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Biriyani</td>
+                            <td>Main Dish</td>
+                            <td><i class="fa fa-inr"></i> 220</td>
+                            <!-- <td style="width: 300px;">
+                           
+                                            <div class="col-2 text-left">
+                                                <button type="button"  class="btn btn-primary">edit
+
+                                                </button>
+                                                
+                                            </div>
+                                            <div class="col- text-right" >
+                                        
+                                                    <button type="button"  class="btn btn-danger">close
+                                                  
+                                                    </button>
+                                            </div>
+                             
+                                    </td> -->
+                        </tr>
+                        <tr>
+                                <td>Chicken Fried Rice</td>
+                                <td>Main Dish</td>
+                                <td><i class="fa fa-inr"></i> 220</td>
+                        </tr>
+                        <tr>
+                                <td>Meals</td>
+                                <td>Main Dish</td>
+                                <td><i class="fa fa-inr"></i> 150</td>
+                        </tr>
+                        <tr>
+                                <td>Chicken Noodels</td>
+                                <td>Main Dish</td>
+                                <td><i class="fa fa-inr"></i> 200</td>
+                        </tr>
+                        <tr>
+                                <td>Chicken Noodels</td>
+                                <td>Main Dish</td>
+                                <td><i class="fa fa-inr"></i> 200</td>
+                        </tr>
+                        <tr>
+                                <td>Chicken Noodels</td>
+                                <td>Main Dish</td>
+                                <td><i class="fa fa-inr"></i> 200</td>
+                        </tr>
+                        <tr>
+                                <td>Chicken Noodels</td>
+                                <td>Main Dish</td>
+                                <td><i class="fa fa-inr"></i> 200</td>
+                        </tr>
+                        <tr>
+                                <td>Chicken Noodels</td>
+                                <td>Main Dish</td>
+                                <td><i class="fa fa-inr"></i> 200</td>
+                        </tr>  
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>        
+</div>
+</div>
+</div>
+</div>
