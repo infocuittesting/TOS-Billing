@@ -42,7 +42,7 @@
    .td-total{
         font-weight: $font-weight-bold;
         font-size: $font-size-h5;
-        padding-top: 20px;
+        padding-top: 0px;
         text-align: right;
     }
 
@@ -64,7 +64,7 @@
         background-color: #fff;
     }
     tbody > tr:nth-of-type(2n) {
-        background-color: $pale-bg;
+        background-color: rgb(231, 230, 230);
     }
     > thead > tr > th,
     > tbody > tr > th,
@@ -72,6 +72,6 @@
     > thead > tr > td,
     > tbody > tr > td,
     > tfoot > tr > td{
-        padding: 15px 8px;
+        padding: 8px 8px;
     }
 }

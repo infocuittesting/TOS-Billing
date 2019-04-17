@@ -1,189 +1,157 @@
 <div class="container-fluid">
-    <div class="row">
-            <div class=" col-lg-9">
+    <div class="row" *ngIf="showhide==true">
+        <div class=" col-lg-12">
 
-                    <div class="col-lg-4" >
-                            <div class="card">
-                                <div class="content">
-                                    <div class="row">
-                                        <div class="col-xs-5">
-                                            <!-- <div class="icon-big icon-warning text-center">
-                                                <i class="ti-layout-width-default"></i>
-                                            </div> -->
-                                            <img src="./assets/empty table.png" style="width:100%;height:50%">
-                                        </div>
-                                        <div class="col-xs-7">
-                                            <div class="numbers">
-                                                <p>TABLE</p>
-                                                1
-                                            </div>
-                                        </div>
+            <div class="col-lg-4" *ngFor="let item of tablelist">
+                <div class="card foldtl">
+                    <div class="content">
+                        <div class="row">
+
+                            <div class="col-xs-7">
+                                <h2>{{item.table_no}}</h2>
+                            </div>
+                            <div class="col-xs-5" *ngIf="item.table_status_id!= 1">
+                                <img src="./assets/1.png" style="width:100%;height:50%">
+                            </div>
+                            <div class="col-xs-5" *ngIf="item.table_status_id== 1">
+                                <img src="./assets/3.png" style="width:100%;height:50%">
+                            </div>
+                        </div>
+                        <div class="footer">
+                            <hr />
+                            <div class="stats">
+                                <div class="row" *ngIf="item.table_status_id == 3">
+                                    <div class="col-md-4">
+                                        <a style="color:rgb(14, 48, 20)">{{item.payment_type}}</a>
                                     </div>
-                                    <div class="footer">
-                                            <hr />
-                                            <div class="stats">
-                                                <!-- <i class="ti-time"></i> 12.00 -->
-                                                Total:<i class="fa fa-inr"></i>790
-                                            </div>
-                                        </div>
+                                    <div class="col-md-4">
+                                        <a style="color:red" (click)="getbill(item)">View&nbsp;Bill</a>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <a style="color:rgb(27, 125, 223)" disabled>Complete</a>
+                                    </div>
+                                </div>
+                                <div class="row" *ngIf="item.table_status_id == 2">
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-4">
+                                        <a style="color:rgb(250, 165, 8)">Occupied</a>
+                                    </div>
+                                </div>
+                                <div class="row" *ngIf="item.table_status_id == 1">
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-4">
+                                        <a style="color:rgb(27, 125, 223)">Vaccant</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                         <div class="col-lg-4">
-                            <div class="card">
-                                <div class="content">
-                                    <div class="row">
-                                        <div class="col-xs-5">
-                                            <!-- <div class="icon-big icon-success text-center">
-                                                <i class="ti-check"></i>
-                                            </div> -->
-                                            <img src="./assets/eating-dinner.png" style="width:100%;height:50%">
-                                        </div>
-                                        <div class="col-xs-7">
-                                            <div class="numbers">
-                                                <p>TABLE</p>
-                                                2
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="footer">
-                                            <hr />
-                                            <div class="stats">
-                                                <i class="ti-time"></i> 12.00
-                                            </div>
-                                        </div>
-                                </div>
-                            </div>
-                        </div> 
-                         <div class="col-lg-4">
-                            <div class="card">
-                                <div class="content">
-                                    <div class="row">
-                                        <div class="col-xs-5">
-                                                <img src="./assets/empty table.png" style="width:100%;height:50%">
-                                            <!-- <div class="icon-big icon-danger text-center">
-                                                <i class="ti-flag-alt"></i>
-                                            </div> -->
-                                        </div>
-                                        <div class="col-xs-7">
-                                            <div class="numbers">
-                                                <p>TABLE</p>
-                                                3
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="footer">
-                                        <hr />
-                                        <div class="stats">
-                                            <i class="ti-time"></i> 12.00
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>                                     
-                        </div>                      
-                        
-                        
-          
-                        <div class="col-lg-4">
-                                <div class="card">
-                                    <div class="content">
-                                        <div class="row">
-                                            <div class="col-xs-5">
-                                                    <img src="./assets/eating-dinner.png" style="width:100%;height:50%">
-                                                <!-- <div class="icon-big icon-danger text-center">
-                                                    <i class="ti-flag-alt"></i>
-                                                </div> -->
-                                            </div>
-                                            <div class="col-xs-7">
-                                                <div class="numbers">
-                                                    <p>TABLE</p>
-                                                    4
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="footer">
-                                            <hr />
-                                            <div class="stats">
-                                                <i class="ti-time"></i> 12.00
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>                          
-                            </div>      
-          
-          
-                            <div class="col-lg-4">
-                                    <div class="card">
-                                        <div class="content">
-                                            <div class="row">
-                                                <div class="col-xs-5">
-                                                        <img src="./assets/empty table.png" style="width:100%;height:50%">
-                                                    <!-- <div class="icon-big icon-warning text-center">
-                                                     <i class="ti-layout-width-default"></i>
-                                                    </div> -->
-                                                </div>
-                                                <div class="col-xs-7">
-                                                    <div class="numbers">
-                                                        <p>TABLE</p>
-                                                        5
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="footer">
-                                                <hr />
-                                                <div class="stats">
-                                                    <i class="ti-time"></i> 12.00
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>                           
-                                </div>      
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="showhide==false">
+        <div class=" col-lg-8">
 
+            <div class="col-lg-4" *ngFor="let item of tablelist">
+                <div class="card foldtl">
+                    <div class="content">
+                        <div class="row">
 
-            
-            <div class="col-lg-3 ">
-                    <div class="row">
-                            <div class="">
-                                <div class="card">
-                                    <div class="header">
-                                        <h4 class="title" style="color:red;text-align: center">TABLE:1</h4>
-                                        <h6 class="category" style="color:red;float: right;margin-top: 10%">Bill.no:1</h6>
-                                        <p class="category" style="color:red;margin-top:10%">BILL</p>
+                            <div class="col-xs-7">
+                                <h2>{{item.table_no}}</h2>
+                            </div>
+                            <div class="col-xs-5" *ngIf="item.table_status_id!= 1">
+                                <img src="./assets/1.png" style="width:100%;height:50%">
+                            </div>
+                            <div class="col-xs-5" *ngIf="item.table_status_id== 1">
+                                <img src="./assets/3.png" style="width:100%;height:50%">
+                            </div>
+                        </div>
+                        <div class="footer">
+                            <hr />
+                            <div class="stats">
+                                <div class="row" *ngIf="item.table_status_id == 3">
+                                    <div class="col-md-3">
+                                        <a style="color:rgb(14, 48, 20)">{{item.payment_type}}</a>
                                     </div>
-                                    <div class="table-responsive my-custom-scrollbar">
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <b></b><tr style="color:red">
-                                                    <th>Items</th>
-                                                    <th>Quantity</th>
-                                                    <th>Price</th>
-                                                </tr>
-                                                
-                                            </thead>
-                                            <tbody>
-                                                <tr *ngFor="let item of Bill">
-                                                    <td>{{item.itemname}}</td>
-                                                    <td><i class="fa fa-times"></i>{{item.quantity}}</td>
-                                                    <td><i class="fa fa-inr"></i> {{item.price}}</td>
-                                                </tr>
-                                            </tbody>
-                                            <tfoot>
-                                                <tr style="color: red;font-size: 20px">    
-                                                                                                 
-                                                    <td>Total</td>
-                                                    
-                                                    <td><i class="fa fa-inr"></i> 790</td>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
-                    
+                                    <div class="col-md-4">
+                                        <a style="color:red" (click)="getbill(item)">View&nbsp;Bill</a>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <a style="color:rgb(27, 125, 223)" (click)="closebill(item.table_no,order)">Complete</a>
                                     </div>
                                 </div>
-                            </div>     
+                                <div class="row" *ngIf="item.table_status_id== 2">
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-4">
+                                        <a style="color:rgb(250, 165, 8)">Occupied</a>
+                                    </div>
+                                </div>
+                                <div class="row" *ngIf="item.table_status_id== 1">
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-4">
+                                        <a style="color:rgb(27, 125, 223)">Vaccant</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <div class="col-lg-4 ">
+            <div class="row">
+                <div class="">
+                    <div class="card">
+                        <div class="header">
+                            <h4 class="title" style="color:red;text-align: center"> TABLE NO : {{tablevalue}}</h4>
+                        </div>
+                        <div class="content">
+                            <div class="table-responsive my-custom-scrollbar">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <b></b>
+                                        <tr style="color:red">
+                                            <th>Items</th>
+                                            <th>Quantity</th>
+                                            <th>Price</th>
+                                        </tr>
+
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of billtable">
+                                            <td>{{item.food_name}}</td>
+                                            <td><i class="fa fa-times"></i>{{item.quantity}}</td>
+                                            <td><i class="fa fa-inr"></i> {{item.total_price}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <hr />
+                        <div>
+                            <!-- <div class="stats"> -->
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <a style="color:red"> Total Price :</a>
+                                </div>
+                                <div class="col-md-4">
+                                    <p style="color:red"> {{total}}</p>
+                                </div>
+                            </div>
+                            <!-- </div> -->
+                        </div>
+                        <br>
+                    </div>
+                </div>
             </div>
 
-        
+        </div>
     </div>
+</div>
