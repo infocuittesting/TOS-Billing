@@ -15,7 +15,10 @@ export class DashboardComponent implements OnInit {
 
     constructor(private commonservice: CommonService) { }
 
-    public tablevalue; total: any; order: any;
+    public tablevalue; total: any; 
+    public order: any;
+    public amount:any;
+    public gstbill:any;
     public tablelist: any[];
     public billtable: any[];
     public showhide: boolean = true;
@@ -44,6 +47,8 @@ export class DashboardComponent implements OnInit {
                 this.billtable = resp.Returnvalue.items;
                 this.total = resp.Returnvalue.grand_total;
                 this.order = resp.Returnvalue.order_no;
+                this.amount= resp.Returnvalue.sub_total;
+                this.gstbill = resp.Returnvalue.GST_Amount;
             });
     }
 

@@ -72,8 +72,8 @@
 
         li{
             > a{
-                margin: 25px 0px;
-                padding-left: 20px;
+                margin: 40px 0px;
+                padding-left: 10px;
                 padding-right: 2px;
 
                 opacity: .7;
@@ -144,10 +144,10 @@
 
     &,
     &[data-background-color="white"]{
-        @include sidebar-background-color($white-background-color, $default-color);
+        @include sidebar-background-color($black-background-color, $white-color);
     }
     &[data-background-color="black"]{
-        @include sidebar-background-color($black-background-color, $white-color);
+        @include sidebar-background-color($white-background-color, $default-color);
     }
 
     &[data-active-color="primary"]{
