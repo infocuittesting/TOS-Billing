@@ -79,10 +79,14 @@ export class UserComponent implements OnInit{
       }
     
       public category_id:any="";
+      public item:any="";
+      public food:any="";
       Insert_food(param1, param2, param3, param4, param5) {
     
-        if (param3 != undefined) {
+        if (param3 != undefined && this.insertitemimg==undefined && this.insertfoodimg==undefined) {
           this.category_id = param3
+          this.item="";
+          this.food=""
         }
         else if (param3 === undefined && param2 != undefined) {
           this.category_id = param2.toString();
@@ -97,10 +101,10 @@ export class UserComponent implements OnInit{
           "food_name": param1.fdname,
           "price": param1.fdprice,
           "item_category_id": this.category_id,
-          "image_url": this.insertitemimg,
+          "image_url": this.item,
           "food_status_id": 1,
           "food_description": "",
-          "food_id_url": "",
+          "food_id_url":this.food,
           "food_type_id": param4,
           "today_special_id": 2,
           "offer_value": 0
@@ -137,18 +141,30 @@ export class UserComponent implements OnInit{
         this.fdtypeid = param.food_type_id
       }
     
+      public foodimage:any;
+      public offer:any;
+      public price:any;
       Update_food(param1, param2, param3, param4, param5, param6,param7) {
-    
+        if(this.updateitemimg==undefined && this.updatefoodimg==undefined )
+        {
+          this.foodimage="";
+          
+          // this.offer=0;
+        }
+        // else if(param1.fdprice==""){
+        //   this.price=0
+        // }
+
     
         let body={
           "food_name":param1.fname,
           "price":param1.fdprice,
           "food_id":param2,
           "item_category_id":param3,
-          "image_url":this.updateitemimg, 
+          "image_url":this.foodimage, 
           "food_status_id":param5, 
           "food_description":"",
-          "food_id_url":this.updatefoodimg,
+          "food_id_url":this.foodimage,
           "food_type_id":param4,
           "today_special_id":param6,
           "offer_value":param1.offer
