@@ -13,13 +13,16 @@ import { CommonService } from '../common.service';
 export class UserComponent implements OnInit{
     constructor(private user: CommonService) { }
     public selectfod: any = [];
+    public reinitselectfod:any = [];
     public fdname: any;
     public fdid: any[];
     public fdcatagory: any;
     public itcatid: any;
+    public showhide: boolean = true;
   
     public getuser: any = [];
     public insert: any = [];
+    public foodcat:any;
   
     public cat: any = [];
     public ftype: any = [];
@@ -66,14 +69,42 @@ export class UserComponent implements OnInit{
   
       }
     ]
+    public specialss
+    cehkfil(specials){
+      if(specials== true){
+        this.specialss="Yes"
+      }else{
+        this.specialss="";
+      }
+    }
+    cehkfils(param){
+      if(param === true){
+        this.selectfod = this.selectfod.filter((items)=>{
+            return items.offer_value != 0;
+        })
+      }
+      else{
+        this.selectfod = this.reinitselectfod;
+      }
+      console.log("filter",JSON.stringify(this.selectfod));
+    }
     ngOnInit(){
         this.Select_food();
         this.Catagory();
+        this.Enable_Food();
     }
+    testfun(){
+      this.showhide=false;
+    }
+test(){
+  this.showhide=true;
+}
+
     Select_food() {
         this.user.Select_food().subscribe((Response: any) => {
           console.log("select", Response)
           this.selectfod = Response.Returnvalue;
+          this.reinitselectfod = this.selectfod;
         });
     
       }
@@ -81,17 +112,24 @@ export class UserComponent implements OnInit{
       public category_id:any="";
       public item:any="";
       public food:any="";
+      public fdcat:any;fdcat1:any;fdtype:any;
       Insert_food(param1, param2, param3, param4, param5) {
     
-        if (param3 != undefined && this.insertitemimg==undefined && this.insertfoodimg==undefined) {
+        if (param3 != undefined) {
           this.category_id = param3
-          this.item="";
-          this.food=""
+         
         }
         else if (param3 === undefined && param2 != undefined) {
           this.category_id = param2.toString();
         }else{
           alert("sothing error")
+        }
+
+        if(this.insertitemimg===undefined){
+          this.insertitemimg=""
+        }
+        if(this.insertfoodimg===undefined){
+          this.insertfoodimg=""
         }
      
     
@@ -101,10 +139,10 @@ export class UserComponent implements OnInit{
           "food_name": param1.fdname,
           "price": param1.fdprice,
           "item_category_id": this.category_id,
-          "image_url": this.item,
+          "image_url": this.insertfoodimg,
           "food_status_id": 1,
           "food_description": "",
-          "food_id_url":this.food,
+          "food_id_url":this.insertitemimg,
           "food_type_id": param4,
           "today_special_id": 2,
           "offer_value": 0
@@ -115,8 +153,8 @@ export class UserComponent implements OnInit{
           if (Response.ReturnCode == "RIS") {
             alert(Response.Return);
             this.Select_food();
-    
           }
+          // this.insert="",this.fdcat="",this.fdcat1="",this.fdtype=""
         })
       }
     
@@ -130,9 +168,13 @@ export class UserComponent implements OnInit{
     
     
       editfood(param) {
+        console.log(param)
+        this.fdcat=param.item_category_id;
         this.getuser.fname = param.food_name;
         this.fdid = param.food_id;
         this.getuser.fdcatagory = param.food_type;
+        this.getuser.fdprice=param.price;
+        this.foodcat=param.food_type_id
       }
     
       public itcatagoryid;
@@ -141,19 +183,39 @@ export class UserComponent implements OnInit{
         this.fdtypeid = param.food_type_id
       }
     
-      public foodimage:any;
+      public foodimage:any="";
+      public catimg:any="";
       public offer:any;
       public price:any;
+
+
+
+
       Update_food(param1, param2, param3, param4, param5, param6,param7) {
-        if(this.updateitemimg==undefined && this.updatefoodimg==undefined )
+        if(this.updateitemimg===undefined)
         {
-          this.foodimage="";
-          
-          // this.offer=0;
+          this.updateitemimg="";
         }
-        // else if(param1.fdprice==""){
-        //   this.price=0
-        // }
+       
+        
+        if(this.updatefoodimg===undefined){
+          this.updatefoodimg="";
+        }
+         
+        if(param3===undefined){
+          param3="";
+        }
+        if(param4===undefined){
+          param4=""
+        }
+        if(param5===undefined){
+          param5=""
+        }
+        if(param6===undefined){
+          param6=""
+        }
+
+        
 
     
         let body={
@@ -161,10 +223,10 @@ export class UserComponent implements OnInit{
           "price":param1.fdprice,
           "food_id":param2,
           "item_category_id":param3,
-          "image_url":this.foodimage, 
+          "image_url":this.updateitemimg, 
           "food_status_id":param5, 
           "food_description":"",
-          "food_id_url":this.foodimage,
+          "food_id_url":this.updatefoodimg,
           "food_type_id":param4,
           "today_special_id":param6,
           "offer_value":param1.offer
@@ -174,12 +236,85 @@ export class UserComponent implements OnInit{
           if (Response.ReturnCode == "RUS") {
             alert(Response.Return);
             this.Select_food();
-            // this.img_64=[];
-            // this.image_64=[];
+            // this.updateitemimg=[];
+            // this.updatefoodimg=[];
           }
         });
       }
-    
+
+public open:any=[];
+public close:any=[];
+public enable:any=[];
+
+      Enable_Food(){
+        this.user.Enable_Food().subscribe((Response:any)=>{
+          if(Response.ReturnCode=="RRS"){
+            this.enable=Response.Returnvalue;
+            this.open=[];this.close=[];
+            for(var i=0;i<this.enable.length;i++){
+             if(this.enable[i].food_status_id=="1"){
+               this.open.push(this.enable[i])
+               console.log(this.open)
+             }
+             else{
+               this.close.push(this.enable[i])
+             }
+            }
+     
+            console.log("close",this.close)
+          }
+     
+      });
+      }
+
+
+      togglebutton(param){
+
+ if(param.food_status_id==1){
+   let body={
+     "food_name":param.food_name,
+     "price":param.price,
+     "food_id":param.food_id,
+     "item_category_id":param.item_category_id,
+     "image_url":"",
+     "food_status_id":2,
+     "food_description":"",
+     "food_id_url":"",
+     "food_type_id":param.food_type_id,
+     "offer_value":param.offer_value
+   }
+   this.user.Update_food(body).subscribe((Response:any)=>{
+     if(Response.ReturnCode=="RUS"){
+      //  this.toastr.success('disabled');
+
+       alert(Response.Return);
+ 
+ }
+ this.Enable_Food();
+ });
+
+ }else{
+   let body={
+     "food_name":param.food_name,
+     "price":param.price,
+     "food_id":param.food_id,
+     "item_category_id":param.item_category_id,
+     "image_url":"",
+     "food_status_id":1,
+     "food_description":"",
+     "food_id_url":"",
+     "food_type_id":param.food_type_id,
+     "offer_value":param.offer_value
+   }
+   this.user.Update_food(body).subscribe((Response:any)=>{
+     if(Response.ReturnCode=="RUS"){
+      //  this.toastr.success('enabled');
+      alert(Response.Return);
+ }
+ this.Enable_Food();
+ });
+ }
+}
     
     
     
@@ -227,8 +362,8 @@ export class UserComponent implements OnInit{
     
         myReader.onloadend = (e) => {
           this.image = myReader.result;
-          this.updateitemimg = this.image.split(",", 2)[1]
-          console.log(this.updateitemimg)
+          this.updatefoodimg = this.image.split(",", 2)[1]
+          console.log(this.updatefoodimg)
         }
         myReader.readAsDataURL(file);
       }
@@ -243,8 +378,8 @@ export class UserComponent implements OnInit{
     
         myReader.onloadend = (e) => {
           this.image = myReader.result;
-          this.updatefoodimg = this.image.split(",", 2)[1]
-          console.log(this.updatefoodimg)
+          this.updateitemimg = this.image.split(",", 2)[1]
+          console.log(this.updateitemimg)
         }
         myReader.readAsDataURL(file);
       }

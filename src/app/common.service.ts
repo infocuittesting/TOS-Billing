@@ -58,7 +58,17 @@ Catagory(){
     return this.http.post("https://table-ordering-system.herokuapp.com/Select_Item_Category",select)
     .map(this.extractData)
 }
+Enable_Food(){
+  let insert={}
+  return this.http.get("https://table-ordering-system.herokuapp.com/Add_Food_Menu_Items",insert)
+  .map(this.extractData)
+}
 
+Disable_Food(){
+  let insert={}
+  return this.http.get("https://table-ordering-system.herokuapp.com/Display_Disable_Food_Item",insert)
+  .map(this.extractData)
+}
   private extractData(res: Response) {
     let body = res.json();
     return body;

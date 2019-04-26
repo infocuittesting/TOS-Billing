@@ -15,10 +15,10 @@ export class DashboardComponent implements OnInit {
 
     constructor(private commonservice: CommonService) { }
 
-    public tablevalue; total: any; 
+    public tablevalue:any[]; total: any; 
     public order: any;
     public amount:any;
-    public gstbill:any;
+    public gstbill:any;sgstbill:any;
     public tablelist: any[];
     public billtable: any[];
     public showhide: boolean = true;
@@ -43,22 +43,27 @@ export class DashboardComponent implements OnInit {
         this.commonservice.bill(param)
             .subscribe((resp: any) => {
                 console.log("testtttttt bill",resp)
-                this.tablevalue = resp.Returnvalue.table_no;
+                this.tablevalue = resp.Returnvalue;
                 this.billtable = resp.Returnvalue.items;
-                this.total = resp.Returnvalue.grand_total;
-                this.order = resp.Returnvalue.order_no;
-                this.amount= resp.Returnvalue.sub_total;
-                this.gstbill = resp.Returnvalue.GST_Amount;
             });
     }
 
-    closebill(param, param1) {
+    closebill(param) {
         let body = {
-            "table_no": param,
-            "order_no": param1
+            "table_no": param.table_no,
+            "order_no": param.order_no,
+            "grand_total": param.grand_total,
+     "CGST_Amount": param.CGST_Amount,
+        "SGST_Amount": param.SGST_Amount,
+        "total_items": param.total_items ,
+        "sub_total": param.sub_total,
+        "total_amount_offers": param.total_amount_offers,
+        "total_offers": param.total_offers
         }
+        console.log("testinput",body)
         this.commonservice.billclose(body)
         .subscribe((resp: any) => {
+            console.log("tesssss",resp)
             if(resp.ReturnCode=="RUS"){
                 this.showhide = true; 
             }

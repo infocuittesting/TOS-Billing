@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from '../common.service';
 import { AmChartsService } from "amcharts3-angular2";
+import *as moment from 'moment';
+
 @Component({
   selector: 'typography-cmp',
   moduleId: module.id,
@@ -14,13 +16,22 @@ export class TypographyComponent implements OnInit {
 
   public tablelist: any[];
 
+  public todate = moment().format('YYYY-MM-DD');
+  public startdate = moment().subtract('days', 7).format('YYYY-MM-DD');
+  public checkboxvalue=3;
   ngOnInit() {
+    this.getreport(this.startdate, this.todate, this.checkboxvalue);
 
   }
 
   public showhide:boolean=true;
   getreport(startdate, todate, checkboxvalue) {
 
+    if(checkboxvalue=='1'||checkboxvalue=='2'){
+      this.showhide=false;
+    }else{
+      this.showhide=true;
+    }
     let body = {
       "from_date": startdate,
       "to_date": todate,
@@ -73,8 +84,8 @@ export class TypographyComponent implements OnInit {
             "autoMargins": false,
             "marginLeft": 30,
             "marginRight": 8,
-            "marginTop": 10,
-            "marginBottom": 26,
+            "marginTop": 20,
+            "marginBottom": 100,
             "depth3D": 20,
             "angle": 30,
             "titles": [{
@@ -91,8 +102,7 @@ export class TypographyComponent implements OnInit {
             "categoryField": "Category_name",
             "categoryAxis": {
               "gridPosition": "start",
-              "autoGridCount": false,
-              "gridCount": 12
+              "labelRotation": 45
             },
             "valueAxes": [{
               "integersOnly": true
@@ -119,7 +129,7 @@ export class TypographyComponent implements OnInit {
 
         }
 /**********************IF completed ***************************************/
-        else {
+        else if(chartData1=="Category"){
           chartData=resp.Return_Category;
           var collectiveData = [];
           console.log("Chart Data",chartData);
@@ -146,8 +156,10 @@ export class TypographyComponent implements OnInit {
             "dataProvider": chartData,
             "valueField": "Count",
             "titleField": "category",
-            "radius": "42%",
-            "innerRadius": "60%",
+            "radius": "29%",
+            "innerRadius": "40%",
+            "labelRadius":4,
+            "marginTop":100,
             "depth3D": 15,
             "theme": "light",
             "labelText": "[[title]]: [[value]]",
@@ -162,8 +174,8 @@ export class TypographyComponent implements OnInit {
             "autoMargins": false,
             "marginLeft": 30,
             "marginRight": 8,
-            "marginTop": 10,
-            "marginBottom": 26,
+            "marginTop": 20,
+            "marginBottom": 30,
             "depth3D": 20,
             "angle": 30,
             "titles": [{
@@ -201,6 +213,102 @@ export class TypographyComponent implements OnInit {
             // chart2.validateData();
             // chart2.animateAgain();
           });
+        }
+        
+        else{
+          var chart = this.AmCharts.makeChart( "chartdiv1", {
+            "type": "serial",
+            "theme": "light",
+            "dataDateFormat": "YYYY-MM-DD",
+            "graphs": [ {
+              "id": "g1",
+              "bullet": "round",
+              "bulletBorderAlpha": 1,
+              "bulletColor": "#FFFFFF",
+              "bulletSize": 5,
+              "hideBulletsCount": 50,
+              "lineThickness": 2,
+              "title": "red line",
+              "useLineColorForBulletBorder": true,
+              "valueField": "amount"
+            } ],
+            "chartScrollbar": {
+              "graph": "g1",
+              "oppositeAxis": false,
+              "offset": 30,
+              "scrollbarHeight": 80,
+              "backgroundAlpha": 0,
+              "selectedBackgroundAlpha": 0.1,
+              "selectedBackgroundColor": "#888888",
+              "graphFillAlpha": 0,
+              "graphLineAlpha": 0.5,
+              "selectedGraphFillAlpha": 0,
+              "selectedGraphLineAlpha": 1,
+              "autoGridCount": true,
+              "color": "#AAAAAA"
+            },
+            "chartCursor": {
+              "cursorAlpha": 1,
+              "cursorColor": "#258cbb"
+            },
+            "categoryField": "date",
+            "categoryAxis": {
+              "parseDates": true,
+              "equalSpacing": true,
+              "gridPosition": "middle",
+              "dashLength": 1,
+              "minorGridEnabled": true
+            },
+            "zoomOutOnDataUpdate": false,
+            "listeners": [ {
+              "event": "init",
+              "method": function( e ) {
+          
+                /**
+                 * Pre-zoom
+                 */
+                e.chart.zoomToIndexes( e.chart.dataProvider.length - 40, e.chart.dataProvider.length - 1 );
+          
+                /**
+                 * Add click event on the plot area
+                 */
+                e.chart.chartDiv.addEventListener( "click", function() { 
+                  // we track cursor's last known position by "changed" event
+                  if ( e.chart.lastCursorPosition !== undefined ) {
+                    // get date of the last known cursor position
+                    var date = e.chart.dataProvider[ e.chart.lastCursorPosition ][ e.chart.categoryField ];
+          
+                    // create a new guide or update position of the previous one
+                    if ( e.chart.categoryAxis.guides.length === 0 ) {
+                      var guide = new this.AmCharts.Guide();
+                      guide.date = date;
+                      guide.lineAlpha = 1;
+                      guide.lineColor = "#c44";
+                      e.chart.categoryAxis.addGuide( guide );
+                    } else {
+                      e.chart.categoryAxis.guides[ 0 ].date = date;
+                    }
+                    e.chart.validateData();
+                  }
+                } )
+                //handle touch screens so that subsequent guides can
+                //be added. Requires that the user taps the next
+                //point twice. Needed in order to not break zoom/pan
+                e.chart.chartDiv.addEventListener( "touchend", function() {
+                  e.chart.tapped = false;
+                });
+              }
+            }, {
+              "event": "changed",
+              "method": function( e ) {
+                /**
+                 * Log cursor's last known position
+                 */
+                e.chart.lastCursorPosition = e.index;
+              }
+            } ],
+            "dataProvider": resp.dataProvider
+          } );
         }
 
 
