@@ -69,6 +69,10 @@ Disable_Food(){
   return this.http.get("https://table-ordering-system.herokuapp.com/Display_Disable_Food_Item",insert)
   .map(this.extractData)
 }
+Table_Status(){
+  return this.http.get("https://table-ordering-system.herokuapp.com/Query_Table_Status")
+  .map(this.extractData)
+}
   private extractData(res: Response) {
     let body = res.json();
     return body;

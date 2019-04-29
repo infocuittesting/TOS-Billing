@@ -2,11 +2,14 @@ import { Component, OnInit, Renderer, ViewChild, ElementRef } from '@angular/cor
 import { ROUTES } from '../../sidebar/sidebar.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { CommonService } from '../../common.service';
 
 @Component({
     moduleId: module.id,
     selector: 'navbar-cmp',
-    templateUrl: 'navbar.component.html'
+    templateUrl: 'navbar.component.html',
+  providers: [CommonService,]
+
 })
 
 export class NavbarComponent implements OnInit{
@@ -18,19 +21,28 @@ export class NavbarComponent implements OnInit{
 
     @ViewChild("navbar-cmp") button;
 
-    constructor(location:Location, private renderer : Renderer, private element : ElementRef, private router: Router) {
+    constructor(private commonservice: CommonService,location:Location, private renderer : Renderer, private element : ElementRef, private router: Router) {
         this.location = location;
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
     }
-
+public ac:any;uc :any;pc:any;
     ngOnInit(){
         this.listTitles = ROUTES.filter(listTitle => listTitle);
         var navbar : HTMLElement = this.element.nativeElement;
         this.toggleButton = navbar.getElementsByClassName('navbar-toggle')[0];
         this.router.events.subscribe((event) => {
           this.sidebarClose();
-       });
+       })
+       this.Table_Status();
+      }
+     
+      Table_Status(){
+        this.commonservice.Table_Status().subscribe((Response:any)=>{
+            this.ac=Response.Available_count;
+            this.uc=Response.unavailable_count;
+            this.pc=Response.payment_count;
+        });
     }
     getTitle(){
         var titlee = window.location.pathname;
