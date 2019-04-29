@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from '../common.service';
+// import { ToastrService } from 'ngx-toastr'
 
 @Component({
     selector: 'user-cmp',
@@ -11,7 +12,7 @@ import { CommonService } from '../common.service';
 })
 
 export class UserComponent implements OnInit{
-    constructor(private user: CommonService) { }
+    constructor(private user: CommonService,) { }
     public selectfod: any = [];
     public reinitselectfod:any = [];
     public fdname: any;
@@ -23,6 +24,8 @@ export class UserComponent implements OnInit{
     public getuser: any = [];
     public insert: any = [];
     public foodcat:any;
+    public fdprice:any;
+    
   
     public cat: any = [];
     public ftype: any = [];
@@ -112,7 +115,11 @@ test(){
       public category_id:any="";
       public item:any="";
       public food:any="";
-      public fdcat:any;fdcat1:any;fdtype:any;
+      public fdcat:any;fdcat1:any;
+      public fdtype:any;
+      public status:any;
+      public tdyspecial:any;
+
       Insert_food(param1, param2, param3, param4, param5) {
     
         if (param3 != undefined) {
@@ -123,6 +130,12 @@ test(){
           this.category_id = param2.toString();
         }else{
           alert("sothing error")
+        }
+        if(param4===undefined){
+          param4=""
+        }
+        if(param1.fdprice===undefined){
+          param1.fdprice=""
         }
 
         if(this.insertitemimg===undefined){
@@ -153,7 +166,11 @@ test(){
           if (Response.ReturnCode == "RIS") {
             alert(Response.Return);
             this.Select_food();
+            this.Enable_Food();
           }
+          // this.fdcat1="";
+          // this.fdname="";
+          // this.fdprice="";
           // this.insert="",this.fdcat="",this.fdcat1="",this.fdtype=""
         })
       }
@@ -171,10 +188,13 @@ test(){
         console.log(param)
         this.fdcat=param.item_category_id;
         this.getuser.fname = param.food_name;
+        this.getuser.offer=param.offer_value
         this.fdid = param.food_id;
         this.getuser.fdcatagory = param.food_type;
         this.getuser.fdprice=param.price;
-        this.foodcat=param.food_type_id
+        this.fdtype=param.food_type_id;
+        this.status=param.food_status_id;
+        this.tdyspecial=param.today_special_id;
       }
     
       public itcatagoryid;
@@ -201,7 +221,12 @@ test(){
         if(this.updatefoodimg===undefined){
           this.updatefoodimg="";
         }
-         
+        if(param1.fdprice===undefined){
+          param1.fdprice=""
+        }
+         if(param1.offer===undefined || param1.offer==""){
+           param1.offer=0
+         }
         if(param3===undefined){
           param3="";
         }
@@ -235,7 +260,9 @@ test(){
         this.user.Update_food(body).subscribe((Response: any) => {
           if (Response.ReturnCode == "RUS") {
             alert(Response.Return);
+            // this.toastr.success('Updated')
             this.Select_food();
+            this.Enable_Food();
             // this.updateitemimg=[];
             // this.updatefoodimg=[];
           }
@@ -288,9 +315,9 @@ public enable:any=[];
       //  this.toastr.success('disabled');
 
        alert(Response.Return);
- 
+       this.Enable_Food();
  }
- this.Enable_Food();
+ 
  });
 
  }else{
@@ -310,77 +337,78 @@ public enable:any=[];
      if(Response.ReturnCode=="RUS"){
       //  this.toastr.success('enabled');
       alert(Response.Return);
- }
+      
  this.Enable_Food();
+ }
  });
  }
 }
     
     
     
-      changeListener($event): void {
-        this.readThis($event.target);
-      }
-    
-      readThis(inputValue: any): void {
-        var file: File = inputValue.files[0];
-        var myReader: FileReader = new FileReader();
-    
-        myReader.onloadend = (e) => {
-          this.image = myReader.result;
-          this.insertitemimg = this.image.split(",", 2)[1]
-          console.log(this.insertitemimg)
-        }
-        myReader.readAsDataURL(file);
-      }
-    
-    
-      ActiveListener($event): void {
-        this.readThat($event.target);
-      }
-    
-      readThat(inputValue: any): void {
-        var file: File = inputValue.files[0];
-        var myReader: FileReader = new FileReader();
-    
-        myReader.onloadend = (e) => {
-          this.image = myReader.result;
-          this.insertfoodimg = this.image.split(",", 2)[1]
-          
-        }
-        myReader.readAsDataURL(file);
-      }
-    
-    
-      UnchangeListener($event): void {
-        this.read($event.target);
-      }
-    
-      read(inputValue: any): void {
-        var file: File = inputValue.files[0];
-        var myReader: FileReader = new FileReader();
-    
-        myReader.onloadend = (e) => {
-          this.image = myReader.result;
-          this.updatefoodimg = this.image.split(",", 2)[1]
-          console.log(this.updatefoodimg)
-        }
-        myReader.readAsDataURL(file);
-      }
-    
-      InActiveListener($event): void {
-        this.readTat($event.target);
-      }
-    
-      readTat(inputValue: any): void {
-        var file: File = inputValue.files[0];
-        var myReader: FileReader = new FileReader();
-    
-        myReader.onloadend = (e) => {
-          this.image = myReader.result;
-          this.updateitemimg = this.image.split(",", 2)[1]
-          console.log(this.updateitemimg)
-        }
-        myReader.readAsDataURL(file);
-      }
+changeListener($event): void {
+  this.readThis($event.target);
+}
+
+readThis(inputValue: any): void {
+  var file: File = inputValue.files[0];
+  var myReader: FileReader = new FileReader();
+
+  myReader.onloadend = (e) => {
+    this.image = myReader.result;
+    this.insertitemimg = this.image.split(",", 2)[1]
+    console.log(this.insertitemimg)
+  }
+  myReader.readAsDataURL(file);
+}
+
+
+ActiveListener($event): void {
+  this.readThat($event.target);
+}
+
+readThat(inputValue: any): void {
+  var file: File = inputValue.files[0];
+  var myReader: FileReader = new FileReader();
+
+  myReader.onloadend = (e) => {
+    this.image = myReader.result;
+    this.insertfoodimg = this.image.split(",", 2)[1]
+
+  }
+  myReader.readAsDataURL(file);
+}
+
+
+UnchangeListener($event): void {
+  this.read($event.target);
+}
+
+read(inputValue: any): void {
+  var file: File = inputValue.files[0];
+  var myReader: FileReader = new FileReader();
+
+  myReader.onloadend = (e) => {
+    this.image = myReader.result;
+    this.updatefoodimg = this.image.split(",", 2)[1]
+    console.log(this.updatefoodimg)
+  }
+  myReader.readAsDataURL(file);
+}
+
+InActiveListener($event): void {
+  this.readTat($event.target);
+}
+
+readTat(inputValue: any): void {
+  var file: File = inputValue.files[0];
+  var myReader: FileReader = new FileReader();
+
+  myReader.onloadend = (e) => {
+    this.image = myReader.result;
+    this.updateitemimg = this.image.split(",", 2)[1]
+    console.log(this.updateitemimg)
+  }
+  myReader.readAsDataURL(file);
+}
 }

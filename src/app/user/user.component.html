@@ -216,6 +216,9 @@
                               Name
                             </th>
                             <th>
+                              Category
+                            </th>
+                            <th>
                               Close
                             </th>
                           </tr>
@@ -227,6 +230,9 @@
                             </td>
                             <td>
                               {{value.food_name}}
+                            </td>
+                            <td>
+                              {{value.category}}
                             </td>
                             <td class="">
                               <i class="fa fa-times" style="color:red;" (click)="togglebutton(value)"></i>
@@ -258,7 +264,9 @@
                             <th>
                               Name
                             </th>
-
+                            <th>
+                              Catagory
+                            </th>
                             <th>
                               Open
                             </th>
@@ -271,6 +279,9 @@
                             </td>
                             <td>
                               {{item.food_name}}
+                            </td>
+                            <td>
+                              {{value.category}}
                             </td>
                             <td class="">
                               <i class="fa fa-plus" style="color:green" (click)="togglebutton(item)"></i>
