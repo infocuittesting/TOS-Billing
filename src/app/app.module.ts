@@ -34,9 +34,10 @@ import { AmChartsModule } from "amcharts3-angular2";
     HttpModule,
     FooterModule,
     FixedPluginModule,
-    FormsModule,AmChartsModule,
+    FormsModule,
+    AmChartsModule,
     // ToastrModule.forRoot({
-    //   timeOut: 1000,
+    //   timeOut: 3000,
     //   positionClass: 'toast-top-right',
     //   preventDuplicates: true,
     // }),

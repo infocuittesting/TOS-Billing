@@ -14,6 +14,17 @@
     width:100%;
     table-layout:fixed;
     }
+    .tableBodyScroll1 tbody {
+      display:block;
+      max-height:380px;
+      overflow-y:scroll;
+      table-layout:fixed;
+      }
+      .tableBodyScroll1 thead, tbody tr {
+      display:table;
+      width:100%;
+      table-layout:fixed;
+      }
 
 
 .foldtl:before {

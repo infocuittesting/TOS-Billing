@@ -22,6 +22,16 @@ export class CommonService {
       .map(this.extractData)
   }
 
+  occupiedbill(param) {
+    let body={
+        "table_no":param.table_no
+      }
+      const headers = new Headers({ 'Content-Type': 'application/json' })
+      const options = new RequestOptions({ headers: headers });
+    return this.http.post('https://table-ordering-system.herokuapp.com/Query_today_food_order_table',body,options)
+      .map(this.extractData)
+  }
+
   billclose(param) {
       const headers = new Headers({ 'Content-Type': 'application/json' })
       const options = new RequestOptions({ headers: headers });

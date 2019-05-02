@@ -68,8 +68,9 @@ export class TypographyComponent implements OnInit {
             "dataProvider": chartData,
             "valueField": "Count",
             "titleField": "table_no",
-            "radius": "42%",
-            "innerRadius": "60%",
+            "radius": "35%",
+            "innerRadius": "50%",
+            "marginTop":30,
             "depth3D": 15,
             "theme": "light",
             "labelText": "[[title]]: [[value]]",
@@ -82,9 +83,9 @@ export class TypographyComponent implements OnInit {
             "theme": "light",
             "pathToImages": "/lib/3/images/",
             "autoMargins": false,
-            "marginLeft": 30,
-            "marginRight": 8,
-            "marginTop": 20,
+            "marginLeft": 70,
+            "marginRight": 15,
+            "marginTop": 40,
             "marginBottom": 100,
             "depth3D": 20,
             "angle": 30,
@@ -102,7 +103,7 @@ export class TypographyComponent implements OnInit {
             "categoryField": "Category_name",
             "categoryAxis": {
               "gridPosition": "start",
-              "labelRotation": 45
+              "labelRotation": 25
             },
             "valueAxes": [{
               "integersOnly": true
@@ -172,10 +173,10 @@ export class TypographyComponent implements OnInit {
             "theme": "light",
             "pathToImages": "/lib/3/images/",
             "autoMargins": false,
-            "marginLeft": 30,
-            "marginRight": 8,
+            "marginLeft": 100,
+            "marginRight": 15,
             "marginTop": 20,
-            "marginBottom": 30,
+            "marginBottom": 110,
             "depth3D": 20,
             "angle": 30,
             "titles": [{
@@ -193,6 +194,7 @@ export class TypographyComponent implements OnInit {
             "categoryAxis": {
               "gridPosition": "start",
               "autoGridCount": false,
+              "labelRotation": 25,
               "gridCount": 12
             },
             "valueAxes": [{
