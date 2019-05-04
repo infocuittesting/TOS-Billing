@@ -20,7 +20,8 @@
       "prefix": "app",
       "styles": [
         "styles.css",
-        "assets/sass/paper-dashboard.scss"
+        "assets/sass/paper-dashboard.scss",
+        "../node_modules/ngx-toastr/toastr.css"
       ],
       "scripts": [
           "../node_modules/jquery/dist/jquery.js",

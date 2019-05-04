@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from '../common.service';
-// import { ToastrService } from 'ngx-toastr'
+import { ToastrService } from 'ngx-toastr'
 
 @Component({
     selector: 'user-cmp',
@@ -12,13 +12,16 @@ import { CommonService } from '../common.service';
 })
 
 export class UserComponent implements OnInit{
-    constructor(private user: CommonService,) { }
+    constructor(private user: CommonService,private toastr: ToastrService) { }
+    showSuccess(message) {
+      this.toastr.success(message);
+    }
     public selectfod: any = [];
     public reinitselectfod:any = [];
     public fdname: any;
     public fdid: any[];
     public fdcatagory: any;
-    public itcatid: any;
+    public itcatid: any;cate:any;
     public showhide: boolean = true;
   
     public getuser: any = [];
@@ -167,6 +170,7 @@ test(){
             alert(Response.Return);
             this.Select_food();
             this.Enable_Food();
+            this.showSuccess("The Iteam is Add successfully")
           }
           // this.fdcat1="";
           // this.fdname="";
@@ -195,6 +199,7 @@ test(){
         this.fdtype=param.food_type_id;
         this.status=param.food_status_id;
         this.tdyspecial=param.today_special_id;
+        this.cate=param.category;
       }
     
       public itcatagoryid;
@@ -218,7 +223,7 @@ test(){
         }
        
         
-        if(this.updatefoodimg===undefined){
+        if(this.updatefoodimg===undefined ||this.updatefoodimg===null){
           this.updatefoodimg="";
         }
         if(param1.fdprice===undefined){
@@ -247,14 +252,15 @@ test(){
           "food_name":param1.fname,
           "price":param1.fdprice,
           "food_id":param2,
-          "item_category_id":param3,
+          "item_category_id":this.fdcat,
           "image_url":this.updateitemimg, 
           "food_status_id":param5, 
           "food_description":"",
           "food_id_url":this.updatefoodimg,
           "food_type_id":param4,
           "today_special_id":param6,
-          "offer_value":param1.offer
+          "offer_value":param1.offer,
+          "category":param3
         }
         console.log("gf", body)
         this.user.Update_food(body).subscribe((Response: any) => {

@@ -17,7 +17,7 @@ import { TypographyComponent }   from './typography/typography.component';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { AmChartsModule } from "amcharts3-angular2";
-// import { ToastrModule } from 'ngx-toastr'
+import { ToastrModule } from 'ngx-toastr'
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,11 +36,11 @@ import { AmChartsModule } from "amcharts3-angular2";
     FixedPluginModule,
     FormsModule,
     AmChartsModule,
-    // ToastrModule.forRoot({
-    //   timeOut: 3000,
-    //   positionClass: 'toast-top-right',
-    //   preventDuplicates: true,
-    // }),
+    ToastrModule.forRoot({
+      timeOut: 4000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

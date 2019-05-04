@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from '../common.service';
-// import { ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 declare var $: any;
 
@@ -14,11 +14,11 @@ declare var $: any;
 
 export class DashboardComponent implements OnInit {
 
-    constructor(private commonservice: CommonService) { }
+    constructor(private commonservice: CommonService,private toastr: ToastrService) { }
 
-    // showSuccess(message) {
-    //     this.toastr.success(message);
-    //   }
+    showSuccess(message) {
+        this.toastr.success(message);
+      }
     public tablevalue:any[]; total: any; 
     public order: any;
     public amount:any;
@@ -69,7 +69,7 @@ export class DashboardComponent implements OnInit {
     }
     closeoccupied(){
         this.showhide=true;
-        // this.showSuccess("This Bill status is viewed")
+        this.showSuccess("The Order Status is viewed")
     }
 
     closebill(param) {
@@ -90,7 +90,7 @@ export class DashboardComponent implements OnInit {
             console.log("tesssss",resp)
             if(resp.ReturnCode=="RUS"){
                 this.showhide = true; 
-                // this.showSuccess("The Bill for Table Number"+param.table_no);
+                this.showSuccess("The Bill for Table Number "+param.table_no);
             }
         });
     }

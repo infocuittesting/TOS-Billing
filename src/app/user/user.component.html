@@ -104,11 +104,11 @@
               <div class="form-group">
                 <label for="itemname">Item Name</label>
                 <input type="text" class="form-control" placeholder="Enter Item Name" name="itemname"
-                  [(ngModel)]="insert.fdname">
+                  [(ngModel)]="insert.fdname" required pattern="[A-Za-z]">
               </div>
               <div class="form-group">
                 <label for="itemcat">Item Catagory</label>
-                <select name="itemcat" [(ngModel)]="fdcat">
+                <select name="itemcat" [(ngModel)]="fdcats">
                   <option *ngFor="let ngg of cat" [ngValue]="ngg.category_id">{{ngg.category}}</option>
                 </select>
                 <input class="form-control" placeholder="Enter Catagory here" name="itemcat" [(ngModel)]="fdcat1">
@@ -132,7 +132,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-info"
-                (click)="Insert_food(insert,fdcat,fdcat1,fdtype,img)">OK</button>
+                (click)="Insert_food(insert,fdcats,fdcat1,fdtype,img);frm.reset()">OK</button>
               <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
           </form>
@@ -165,9 +165,8 @@
               <option *ngFor="let agg of foodstatus" [ngValue]="agg.status_id">{{agg.status}}</option>
             </select>
             <label>Item Catagory</label>
-            <select placeholder="Enter Catagory here" class="form-control" name="itemcat" [(ngModel)]="fdcat">
-              <option *ngFor="let ngg of cat" [ngValue]="ngg.category_id">{{ngg.category}}</option>
-            </select>
+            <input placeholder="Enter Catagory here" class="form-control" name="itemcat" [(ngModel)]="cate">
+              
             <!-- <input class="form-control" placeholder="Enter Catagory here" name="itemcat" [(ngModel)]="fdcat1"> -->
             <input type="file" accept="image/*" (change)="InActiveListener($event)" name="image"
               [(ngModel)]="img.updatefoodimg">
@@ -189,7 +188,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-info"
-              (click)="Update_food(getuser,fdid,fdcat,fdtype,status,tdyspecial,img)" data-dismiss="modal">OK</button>
+              (click)="Update_food(getuser,fdid,cate,fdtype,status,tdyspecial,img)" data-dismiss="modal">OK</button>
             <button type="button" class="btn btn-danger" data-dismiss="modal">close</button>
           </div>
         </div>
