@@ -26,6 +26,7 @@ export class NavbarComponent implements OnInit{
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
     }
+    public timeinterval:any;
 public ac:any;uc :any;pc:any;
     ngOnInit(){
         this.listTitles = ROUTES.filter(listTitle => listTitle);
@@ -35,6 +36,9 @@ public ac:any;uc :any;pc:any;
           this.sidebarClose();
        })
        this.Table_Status();
+       this.timeinterval=setInterval(() => {
+        this.Table_Status(); 
+      }, 2000); 
       }
      
       Table_Status(){

@@ -132,7 +132,9 @@ test(){
         else if (param3 === undefined && param2 != undefined) {
           this.category_id = param2.toString();
         }else{
-          alert("sothing error")
+          // alert("sothing error")
+       this.showSuccess("sothing error");
+
         }
         if(param4===undefined){
           param4=""
@@ -167,7 +169,7 @@ test(){
         this.user.Insert_food(body).subscribe((Response: any) => {
           console.log("resp", Response)
           if (Response.ReturnCode == "RIS") {
-            alert(Response.Return);
+            // alert(Response.Return);
             this.Select_food();
             this.Enable_Food();
             this.showSuccess("The Iteam is Add successfully")
@@ -265,12 +267,14 @@ test(){
         console.log("gf", body)
         this.user.Update_food(body).subscribe((Response: any) => {
           if (Response.ReturnCode == "RUS") {
-            alert(Response.Return);
+            // alert(Response.Return);
             // this.toastr.success('Updated')
             this.Select_food();
             this.Enable_Food();
             // this.updateitemimg=[];
             // this.updatefoodimg=[];
+            this.showSuccess("The Iteam and Category is Updated successfully")
+
           }
         });
       }
@@ -320,8 +324,10 @@ public enable:any=[];
      if(Response.ReturnCode=="RUS"){
       //  this.toastr.success('disabled');
 
-       alert(Response.Return);
+      //  alert(Response.Return);
        this.Enable_Food();
+       this.showSuccess("The Food Iteam is updated successfully");
+
  }
  
  });
@@ -342,7 +348,8 @@ public enable:any=[];
    this.user.Update_food(body).subscribe((Response:any)=>{
      if(Response.ReturnCode=="RUS"){
       //  this.toastr.success('enabled');
-      alert(Response.Return);
+      // alert(Response.Return);
+      this.showSuccess("The Food Iteam is updated successfully");
       
  this.Enable_Food();
  }
