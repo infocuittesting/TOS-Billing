@@ -35,17 +35,40 @@ public ac:any;uc :any;pc:any;
         this.router.events.subscribe((event) => {
           this.sidebarClose();
        })
-       this.Table_Status();
+       
+        this.commonservice.Gettable()
+        .subscribe((Response: any) => {
+            if (Response.ReturnCode == "RRS") {
+                this.ac=Response.Available_count;
+                this.uc=Response.unavailable_count;
+                this.pc=Response.payment_count;
+            }
+        });
+       
        this.timeinterval=setInterval(() => {
         this.Table_Status(); 
-      }, 2000); 
+      }, 3000); 
       }
      
       Table_Status(){
-        this.commonservice.Table_Status().subscribe((Response:any)=>{
-            this.ac=Response.Available_count;
-            this.uc=Response.unavailable_count;
-            this.pc=Response.payment_count;
+        this.commonservice.Gettablestatus()
+        .subscribe((resp: any) => {
+            console.log("myyyyy", resp)
+            if (resp.Changes_Flage == 1) {
+                this.commonservice.Gettable()
+                    .subscribe((Response: any) => {
+                        if (Response.ReturnCode == "RRS") {
+                            this.ac=Response.Available_count;
+                            this.uc=Response.unavailable_count;
+                            this.pc=Response.payment_count;
+                            
+                            this.commonservice.Gettableupdate()
+                                .subscribe((resp2: any) => {
+                                    console.log("testttttmy", resp2)
+                                });
+                        }
+                    });
+            }
         });
     }
     getTitle(){
